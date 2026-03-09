@@ -1,0 +1,63 @@
+
+stages:          # List of stages for jobs, and their order of execution
+  - expose-jwt
+  - authenticate
+  - retrieve
+
+job_with_id_token:
+  stage: expose-jwt
+  id_tokens:
+    MY_ID_TOKEN:
+      aud: https://10.0.0.198 #url of the conjur server
+  script:
+    - echo $MY_ID_TOKEN | base64 #unmasking token to configure conjur host with appropriate claims
+  tags:
+    - jwt
+
+image: curlimages/curl:latest
+
+authenticate_to_conjur:       # This job runs in the build stage, which runs first.
+  stage: authenticate
+  script:
+    - |
+      echo "AUTHENTICATING"
+      AUTHN_TOKEN=$(curl -k --request POST "https://10.0.0.198/authn-jwt/gitlab/majorkey_dev/authenticate" \
+      --header "Content-Type: application/x-www-form-urlencoded" \
+      --header "Accept-Encoding: base64" \
+      --data-urlencode "jwt=$MY_ID_TOKEN")
+      export AUTHN_TOKEN
+      echo "Token successfully assigned"
+  tags:
+    - jwt
+  
+
+
+#---REMOVE THIS BLOCK FROM ANY PRODUCTION CODE---#
+#    - echo "PRINT AUTHN TOKEN"
+#    - echo "AUTHN_TOKEN=$AUTHN_TOKEN"
+#    - echo "AUTHN TOKEN PRINTED"
+#  tags:
+#    - jwt
+#------------------END BLOCK----------------------#
+
+retrieve_secret:       # This job runs in the build stage, which runs first.
+  stage: retrieve
+  script:
+    - |
+      echo "RETRIEVING SECRET"
+      SECRET=$(curl -k \
+      --header "Authorization:Token token=\"${AUTHN_TOKEN}\"" \
+      --header "Accept-Encoding: base64" \
+      -X GET "https://10.0.0.198/secrets/majorkey_dev/variable/gitlab%2Fgitlab_test_variable")
+      echo "SECRET=$SECRET"
+      echo "SECRET RETRIEVED"
+  tags:
+    - jwt
+
+
+
+   
+   
+
+
+

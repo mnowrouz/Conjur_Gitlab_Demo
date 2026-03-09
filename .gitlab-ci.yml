@@ -1,0 +1,68 @@
+variables:
+  CONJUR_APPLIANCE_URL: "https://ip-10-0-0-198.ec2.internal"
+  CONJUR_ACCOUNT: "majorkey_dev"
+  CONJUR_AUTHN_JWT_SERVICE_ID: "gitlab"
+  # Put full Conjur SSL certificate here if using self-signed certs
+  # Your can find this inside the conjur container at /opt/conjur/etc/ssl
+  CONJUR_SSL_CERTIFICATE: |
+    -----BEGIN CERTIFICATE-----
+    MIIDbzCCAlegAwIBAgIVANfPRKO3Z009WFhAF5Vb8Q+AlxP3MA0GCSqGSIb3DQEB
+    CwUAMFAxFTATBgNVBAoMDG1ham9ya2V5X2RldjESMBAGA1UECwwJQ29uanVyIENB
+    MSMwIQYDVQQDDBppcC0xMC0wLTAtMTk4LmVjMi5pbnRlcm5hbDAeFw0yNDA3Mjkx
+    NjQwMThaFw0zNDA3MjcxNjQwMThaMCUxIzAhBgNVBAMMGmlwLTEwLTAtMC0xOTgu
+    ZWMyLmludGVybmFsMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAysMW
+    k12BpuRx9BUENa1xFlCE4ucDzs5j21TcAaraRhiMajN04XvZOyWzrEf0ChX17w5w
+    WrgxQMRDlylPvSmgWBy6YykUcUBBIcY7byMEyaksEdM1oACHrUxjt0Gj7PLBeZYE
+    U7P7csULIJJKfTvblqbc5K8hI422fZG/Y7oLmyxXhWUncYJ3wparK/ngdwUNPXnn
+    irGo4gJn8Fv3nlVm2W+Xlb1wflAwPy7TlQ0hbNsEF/aZ3Ow+4hBnpSGDKjN9XFOM
+    DjhL8+pPMhQ+tcPopVin+t5GVgEvJdOMihgns3ceAzzoAraugEP9gCoDrxipxCyH
+    2y3P0EAUc4fwWaDg6wIDAQABo2swaTAOBgNVHQ8BAf8EBAMCBaAwHQYDVR0OBBYE
+    FNo5o+5ea0sNMlW/75VgGJCv2AcJMDgGA1UdEQQxMC+CGmlwLTEwLTAtMC0xOTgu
+    ZWMyLmludGVybmFsgglsb2NhbGhvc3SCBmNvbmp1cjANBgkqhkiG9w0BAQsFAAOC
+    AQEAjXrhw6+k4B4aqAKagJkmaycB3RPuVWnZ9imUGaWVps3gIWvYsNrkxcBlTqfg
+    K/QBKqhPHGSTPHHKklZ+cTpub7lrsykAm/jPcQi1uBDqcPG8qwyh/AoR078oPDdJ
+    KDq/m/NM/7ToMo77i/WZeB63K69d8opa4m9rfkPXdnvGSLFY3souRMjvU9B9yCn0
+    oOQBQJN36fHVJfo0L6vyAtpKmzABEIWEiSewFeRYU4fdDW7uZ8T78dGcZAY6FOtO
+    oxuCRUAHO0HabsMcYULOpMQ4mOEUI/DmBzojU4Fiid0XBYBTF5DswvhxN5x+A3qW
+    3bNG81cqaDYWmjRQ4n+Xqf5IqA==
+    -----END CERTIFICATE-----
+    -----BEGIN CERTIFICATE-----
+    MIIDxzCCAq+gAwIBAgIUKoiaa7Ja7X3xo2kNEAyWFzzMLuwwDQYJKoZIhvcNAQEL
+    BQAwUDEVMBMGA1UECgwMbWFqb3JrZXlfZGV2MRIwEAYDVQQLDAlDb25qdXIgQ0Ex
+    IzAhBgNVBAMMGmlwLTEwLTAtMC0xOTguZWMyLmludGVybmFsMB4XDTI0MDcyOTE2
+    NDAxMloXDTM0MDcyNzE2NDAxMlowUDEVMBMGA1UECgwMbWFqb3JrZXlfZGV2MRIw
+    EAYDVQQLDAlDb25qdXIgQ0ExIzAhBgNVBAMMGmlwLTEwLTAtMC0xOTguZWMyLmlu
+    dGVybmFsMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAosXXQeaxhP23
+    Qta0q3TyZcpubMLo45qs/2ZCSzY6KZNDfUfb3JqozRWYVFrQOsQWOSqPeLqfviVo
+    hKpMmOBZjXSQVnXrhLoPfT6nuJQchnuhukSBGHNM10yewHztUzQ5ztDDboOy5FoC
+    40D/TMzVKzME9mJH3DRTAnGb++KI6QFol8xW8haafPX8mviBc+jHlpZI43cs1jak
+    cwy5INvRHzauS0UZ9tOIhDfIMQ3VmakfVBUJtO3K3i/INJQTBQSaz80j/PUylAkt
+    hAUu1L784kO5NnS+rdNJqo/2eHLZ6pbQEbQ8kR7AU+31SAMP7FKhJ61cCsALdsTk
+    xpUwidjowQIDAQABo4GYMIGVMDgGA1UdEQQxMC+CGmlwLTEwLTAtMC0xOTguZWMy
+    LmludGVybmFsgglsb2NhbGhvc3SCBmNvbmp1cjAdBgNVHQ4EFgQU+uKC5PLMXKLx
+    XrPO7xXiuhAAIMswHwYDVR0jBBgwFoAU+uKC5PLMXKLxXrPO7xXiuhAAIMswDAYD
+    VR0TBAUwAwEB/zALBgNVHQ8EBAMCAeYwDQYJKoZIhvcNAQELBQADggEBAA0VDJ0i
+    mf5cLwKFYp8Ub/rZAlUNQ7HoGPlyhlX7rE9PeZ3bkYVjsqQmpwiBqclNaSnO7iXn
+    PTUj9zKX2Y1fu4TU/Mnx3S0Es/LlM+H6XP6n5X65AY2GP9wDPTbWpAu72OC3DlvE
+    OZO93YiN9Zg5tihdrBBzteX08MAa+1Xl2NEyYhVtsVvxOSxgJN/NeSmwlpCELC4c
+    iDM+GqhoRHQD/DebY/dWVI132slOT7D6IJOIeo0mzoxnBcVIBTITg00LrLK14qT5
+    birLqqSNZ7k4bSASmI9p78Tl5Uj/yVmML4eBOMEkDKSOFepO0Nt+lAYrm+7NLSbD
+    jPN51mWj7bRig+0=
+    -----END CERTIFICATE-----
+
+
+alpine:
+  id_tokens:
+    MY_ID_TOKEN:
+      aud: https://ip-10-0-0-198.ec2.internal
+  variables:
+    CONJUR_AUTHN_JWT_TOKEN: $MY_ID_TOKEN
+  image: cyberark/authn-jwt-gitlab:alpine-1.0.0
+  script:
+    - export TEST_PASSWORD=$(CONJUR_SECRET_ID="gitlab/gitlab_test_variable" /authn-jwt-gitlab)
+    - echo $TEST_PASSWORD
+  tags:
+    - jwt
+
+
+    #BUILD

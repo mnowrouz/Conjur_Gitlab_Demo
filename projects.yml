@@ -1,0 +1,34 @@
+#conjur policy load -b root -f projects.yml
+
+#Create host with jwt claims in the annotations
+
+- !policy
+  id: gitlab
+  body:
+  - !host
+    id: embark4
+    annotations:
+      description: test gitlab pipeline job for JWT authentication
+      gitlab: true
+      project_url: na
+      authn-jwt/gitlab/project_path: embark4/embark-jwt-proxy
+
+      
+  # --- Optional Configuration Begin --- 
+  # Create a variable for testing, and give jenkins host read/execute privs on this variable
+  - !variable
+    id: gitlab_test_variable
+  - !permit
+      role: !host embark4
+      privileges: [read, execute]
+      resource: !variable gitlab_test_variable
+  # --- Optional Configuration End ---
+    
+
+
+
+#Grant host membership to jenkins jwt authenticator apps group (so it can be authorized to use the authenticator)
+
+- !grant
+  role: !group conjur/authn-jwt/gitlab/apps
+  member: !host gitlab/embark4
