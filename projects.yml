@@ -6,12 +6,12 @@
   id: gitlab
   body:
   - !host
-    id: embark4
+    id: mnowrouz
     annotations:
       description: test gitlab pipeline job for JWT authentication
       gitlab: true
       project_url: na
-      authn-jwt/gitlab/project_path: embark4/embark-jwt-proxy
+      authn-jwt/gitlab/project_path: mnowrouz/conjur-gitlab
 
       
   # --- Optional Configuration Begin --- 
@@ -19,7 +19,7 @@
   - !variable
     id: gitlab_test_variable
   - !permit
-      role: !host embark4
+      role: !host mnowrouz
       privileges: [read, execute]
       resource: !variable gitlab_test_variable
   # --- Optional Configuration End ---
@@ -31,4 +31,4 @@
 
 - !grant
   role: !group conjur/authn-jwt/gitlab/apps
-  member: !host gitlab/embark4
+  member: !host gitlab/mnowrouz
