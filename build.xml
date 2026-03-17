@@ -1,0 +1,28 @@
+<project name="conjur-gitlab-demo" default="deploy-demo">
+
+    <!-- Load shell environment variables into Ant as env.* -->
+    <property environment="env"/>
+
+    <target name="validate">
+        <echo message="Validating required environment variables..."/>
+        <fail unless="env.TEST_PASSWORD"
+              message="TEST_PASSWORD environment variable is required"/>
+    </target>
+
+    <target name="deploy-demo" depends="validate">
+        <echo message="Running demo build..."/>
+
+        <!-- Create a generated file to prove the secret was injected -->
+        <echo file="generated-settings.xml"><![CDATA[
+<settings>
+  <server>
+    <username>demo-user</username>
+    <password>${env.TEST_PASSWORD}</password>
+  </server>
+</settings>
+]]></echo>
+
+        <echo message="generated-settings.xml created successfully"/>
+    </target>
+
+</project>
