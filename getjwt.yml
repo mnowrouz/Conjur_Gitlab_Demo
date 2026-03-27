@@ -1,0 +1,11 @@
+stages:
+  - getjwt
+
+deploy-job:
+  stage: getjwt
+  id_tokens:
+    MY_OIDC_TOKEN:
+      aud: https://pam-dap-vault.epa.gov # Replace with the audience expected by your service
+  script:
+    # Access the JWT value via the specified environment variable
+    - echo "My JWT token is: $MY_OIDC_TOKEN"

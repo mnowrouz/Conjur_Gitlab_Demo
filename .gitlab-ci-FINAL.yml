@@ -1,0 +1,89 @@
+stages:
+  - test
+
+variables:
+  CONJUR_APPLIANCE_URL: "https://ip-10-0-0-167.ec2.internal"
+  CONJUR_ACCOUNT: "test"
+  CONJUR_AUTHN_JWT_SERVICE_ID: "gitlab"
+  CONJUR_SSL_CERTIFICATE: |
+    -----BEGIN CERTIFICATE-----
+    MIIDezCCAmOgAwIBAgIVAKnzMRi5EFVwZ11p5BIIc3EQBSAgMA0GCSqGSIb3DQEB
+    CwUAMEgxDTALBgNVBAoMBHRlc3QxEjAQBgNVBAsMCUNvbmp1ciBDQTEjMCEGA1UE
+    AwwaaXAtMTAtMC0wLTE2Ny5lYzIuaW50ZXJuYWwwHhcNMjYwMzE2MTgxMzI1WhcN
+    MzYwMzEzMTgxMzI1WjAlMSMwIQYDVQQDDBppcC0xMC0wLTAtMTY3LmVjMi5pbnRl
+    cm5hbDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKCQ53M9lc8Bdgfx
+    7A82Ydr6P96jGXIxduYeGL0zIGxl0/7AKogBkC1xAGNvHzyqL3ClZWZfjQxqQDCe
+    mSvaKKbMlgI5rdNNhqyV5PraQkUF9XRvkTtbPsob5OSr0nQi8hxOtfvqK2pQMoSa
+    WWQYqM36g58g1+4vxmeO5hLYGlwoyEd3heeRwBZr4XrBgYDu13luCZeUoBda4+rn
+    6C2cUYMFjuy/fXwt4S6NVYXRzTp5dkcP+ceAyRuLw8IKKhtairlbcAQZmOcNJCwZ
+    c0ITApt5ot6toCERbHJI+RDCoM+sL2Jv79y0Itv3m3/VkRuvNSSgZ2mT0vkwI+88
+    /gVjlIkCAwEAAaN/MH0wDgYDVR0PAQH/BAQDAgWgMB0GA1UdDgQWBBTaOaPuXmtL
+    DTJVv++VYBiQr9gHCTBMBgNVHREERTBDghppcC0xMC0wLTAtMTY3LmVjMi5pbnRl
+    cm5hbIIaaXAtMTAtMC0wLTE2Ny5lYzIuaW50ZXJuYWyCCWxvY2FsaG9zdDANBgkq
+    hkiG9w0BAQsFAAOCAQEALnPS/9faUBdmVxZKqUWnoxKWfwvaqdTkW+l5mlLxuA5g
+    43pGnc/wUnfdmW7qEDRSvPFlnau7pQsOZIIrvVmYkp/EvuInma/1q/YHhpxpFBOc
+    NGxmefagb97T7H8bQ8uWA3pyRkdaoSvExDtIO/UG4YzY5b0PAnqZLepEllZifASZ
+    BocCD7YjXQDID/dTZftpaRWnl2DkvGt2CoOd3DT8RkC4FH0EkY2TGI4cQ0PxH9sA
+    DF+SsHnSL5GbB+EjihpN+Lzr4hqV6QOOmpJNqXWVTcunM87rIVcBBgbWN0W/w64g
+    Hstw6FHUlgyik9hDmec5kzph7ELuo1G7/0ZmrTOr9A==
+    -----END CERTIFICATE-----
+    -----BEGIN CERTIFICATE-----
+    MIIDyzCCArOgAwIBAgIURJcSRMCipQ2qvXmU/g8VSQrqOUIwDQYJKoZIhvcNAQEL
+    BQAwSDENMAsGA1UECgwEdGVzdDESMBAGA1UECwwJQ29uanVyIENBMSMwIQYDVQQD
+    DBppcC0xMC0wLTAtMTY3LmVjMi5pbnRlcm5hbDAeFw0yNjAzMTYxODEzMTlaFw0z
+    NjAzMTMxODEzMTlaMEgxDTALBgNVBAoMBHRlc3QxEjAQBgNVBAsMCUNvbmp1ciBD
+    QTEjMCEGA1UEAwwaaXAtMTAtMC0wLTE2Ny5lYzIuaW50ZXJuYWwwggEiMA0GCSqG
+    SIb3DQEBAQUAA4IBDwAwggEKAoIBAQCigWFwa+mxBo2uxWTFCS/YkjgLbfEK3erg
+    RwE7luz9PEYWADYTLM1xgq6SZQkUsqMC6K/Sef5+hEHGXC+LqFEeroe2wQvpBcAG
+    EyOJJCBq9kfkNedmTDI3CPA/zgKbQwXBgUZIpn6ODbA1SKQpsNP/Cjn32UTIzbJj
+    ZlqmqrkCs8q/SC6pHouI8w0qOSiO6UV2WB9PwYiJtFbOlVoEhukm3IFK26IVCfLl
+    S1lMkhP7cxYZYTBzyQoJIeLeSk/227Kedgt3ivflb6a3RjkcLgbOiin6SAvMVL2B
+    bXqfC3T7x1Va6h+XtyfAU+TjBt4ZjZVjn2kSyKJpzpO4QD+hByW5AgMBAAGjgaww
+    gakwTAYDVR0RBEUwQ4IaaXAtMTAtMC0wLTE2Ny5lYzIuaW50ZXJuYWyCGmlwLTEw
+    LTAtMC0xNjcuZWMyLmludGVybmFsgglsb2NhbGhvc3QwHQYDVR0OBBYEFNPJs95Y
+    6WQa7tw1H27q9FAyw5YFMB8GA1UdIwQYMBaAFNPJs95Y6WQa7tw1H27q9FAyw5YF
+    MAwGA1UdEwQFMAMBAf8wCwYDVR0PBAQDAgHmMA0GCSqGSIb3DQEBCwUAA4IBAQAN
+    kU5braHhi31p+oicCILYsn+Zj7SMMyiMJYEHOYmug7yKegU1S0wgdGqdBwJgy96Z
+    G1RlYdv/Pta9gPEbNyLyNRt4oRip3YJmhq/4mzgZ8O46QIZirunZx0RGoBiZidHY
+    0OmlypChpHLVYGUNk7zGkiP8DkuL9QVHf49Jx7womjyBsw6a0lNajy4ZpNAEjeKh
+    3RyfakxKqNY0zc0ldOpYAH0+P4fKa4b1fVK6QdUcY8obyoaKmWajQ8ZQijRuBrxs
+    Ug6TtQMU3t56u4+QJ5WWf2Ebch7Pilmasp3vb5za0usSHZ6PJtHzU1BCArIpBfQ/
+    IzrUETtgzP54WHMSeKY2
+    -----END CERTIFICATE-----
+
+conjur-test:
+  stage: test
+  image: cyberark/authn-jwt-gitlab:alpine-1.0.0
+  tags:
+    - jwt
+
+  id_tokens:
+    MY_ID_TOKEN:
+      aud: "https://ip-10-0-0-167.ec2.internal"
+
+  variables:
+    CONJUR_AUTHN_JWT_TOKEN: $MY_ID_TOKEN
+
+  script:
+    - echo "=== Install required packages ==="
+    - apk add --no-cache python3 curl wget tar openjdk17-jre
+
+    - echo "=== Install Apache Ant ==="
+    - wget -q https://dlcdn.apache.org/ant/binaries/apache-ant-1.10.15-bin.tar.gz
+    - tar -xzf apache-ant-1.10.15-bin.tar.gz
+    - export ANT_HOME="$CI_PROJECT_DIR/apache-ant-1.10.15"
+    - export PATH="$ANT_HOME/bin:$PATH"
+    - ant -version
+
+    - echo "=== Retrieve secret from Conjur ==="
+    - export TEST_PASSWORD="$(CONJUR_SECRET_ID='gitlab/gitlab_test_variable' /authn-jwt-gitlab)"
+    - test -n "$TEST_PASSWORD"
+    - echo "Secret retrieved successfully"
+
+    - echo "=== Run Ant demo build ==="
+    - ant deploy-demo
+
+    - echo "=== Show generated file ==="
+    - cat generated-settings.xml
+
+    #test
